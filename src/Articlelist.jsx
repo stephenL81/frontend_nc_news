@@ -4,6 +4,7 @@ import Articlecard from "./Articlecard";
 import axios from "axios";
 
 const Articlelist = () => {
+    const [view , setView] = useState([])
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
@@ -13,6 +14,15 @@ const Articlelist = () => {
         setArticles(data.articles);
       });
   }, []);
+
+const showArticle = (article_id) => {
+    axios
+    .get(`https://stephennc-news.onrender.com/api/articles/${article_id}`)
+    .then(({data}) =>{
+        console.log(data.article)
+    //setArticles(data.article)
+    })
+}
 
   return (
     <div className="articlelist">
@@ -25,6 +35,8 @@ const Articlelist = () => {
             author={author}
             created_at={created_at}
             votes={votes}
+            showArticle={showArticle}
+            article_id={article_id}
           />
         );
       })}
