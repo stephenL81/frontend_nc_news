@@ -1,48 +1,56 @@
 import { useEffect, useState } from "react";
 import "../src/css/Articlelist.css";
 import Articlecard from "./Articlecard";
-import axios from "axios";
+import "./css/Articlecard.css"
+import { getAllArticles } from "../src/Api"
+
 
 const Articlelist = () => {
-    const [view , setView] = useState([])
-  const [articles, setArticles] = useState([]);
+const [articles, setArticles] = useState([]);
+const [showSingle, setShowSingle] = useState(null);
+const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    axios
-      .get("https://stephennc-news.onrender.com/api/articles")
-      .then(({ data }) => {
-        setArticles(data.articles);
-      });
-  }, []);
 
-const showArticle = (article_id) => {
-    axios
-    .get(`https://stephennc-news.onrender.com/api/articles/${article_id}`)
-    .then(({data}) =>{
-        console.log(data.article)
-    //setArticles(data.article)
-    })
-}
+useEffect(() => {
+  getAllArticles().then((data) =>{
+    console.log(data)
+    setArticles(data)
+    setIsLoading(false)
+  })
+}, []);
 
-  return (
-    <div className="articlelist">
-      {articles.map((articles) => {
-        const { title, created_at, author, votes, article_id } = articles;
-        return (
-          <Articlecard
-            key={article_id}
-            title={title}
-            author={author}
-            created_at={created_at}
-            votes={votes}
-            showArticle={showArticle}
-            article_id={article_id}
-          />
-        );
-      })}
-      ;
-    </div>
-  );
+
+const backToArticles = () => {
+setShowSingle(null);
 };
 
+if(isLoading) return (<h1>Loading...</h1>);
+
+if (articles.length === 0){
+  return<h1>No articles to display</h1>
+}
+
+return (
+<div className="articleList">
+{articles.map(
+({ title, created_at, author, votes, article_id, article_img_url }) => (
+<Articlecard
+key={article_id}
+article_id={article_id}
+title={title}
+author={author}
+created_at={created_at}
+votes={votes}
+article_img_url={article_img_url}
+// showArticle={showArticle}
+/>
+)
+)}
+</div>
+);
+};
+
+
 export default Articlelist;
+
+

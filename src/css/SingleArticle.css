@@ -1,0 +1,12 @@
+
+.label {
+    color: blue; /* Set label text color to blue */
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  
+  .article-details label {
+    /* Specific styles for labels inside .article-details div */
+    display: inline-block; /* Make labels and elements appear side by side */
+    width: 80px; /* Adjust the width as needed for alignment */
+  }
