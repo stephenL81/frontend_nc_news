@@ -1,0 +1,11 @@
+
+.label {
+    color: blue; 
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  
+  .article-details label {
+    display: inline-block; 
+    width: 80px; 
+  }
