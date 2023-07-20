@@ -3,6 +3,7 @@ import "../src/css/Articlelist.css";
 import Articlecard from "./Articlecard";
 import "./css/Articlecard.css"
 import { getAllArticles } from "../src/Api"
+import { getComments } from "../src/Api";
 
 
 const Articlelist = () => {
@@ -13,7 +14,6 @@ const [isLoading, setIsLoading] = useState(true);
 
 useEffect(() => {
   getAllArticles().then((data) =>{
-    console.log(data)
     setArticles(data)
     setIsLoading(false)
   })
@@ -42,7 +42,6 @@ author={author}
 created_at={created_at}
 votes={votes}
 article_img_url={article_img_url}
-// showArticle={showArticle}
 />
 )
 )}

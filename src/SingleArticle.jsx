@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getSingleArticle } from './Api';
+import { getSingleArticle , getComments} from './Api';
 import './css/SingleArticle.css'
+import Comments from './Comments';
 
 const SingleArticle = () => {
 
     const { article_id } = useParams();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [comments , setComments] =useState(null)
+    const [showComments, setShowComments] = useState(false)
 
     useEffect(() => {
         getSingleArticle(article_id)
@@ -21,9 +24,20 @@ const SingleArticle = () => {
         return <h1>Loading...</h1>
     }
 
-    const {title,author,created_at, votes, body, article_img_url} = article;
+    const commentsClicked = () => {
+        getComments(article_id)
+        .then((commentsData) =>{
+            setComments(commentsData);
+            setShowComments(true)
+        
+        })
+}
+
+
+    const {title,author,created_at, votes, body, article_img_url,} = article;
     
     return (
+    
     <div>
     <h1>{title}</h1>
     <img src = {article_img_url}/>
@@ -35,7 +49,10 @@ const SingleArticle = () => {
     <label style={{ color: 'blue' }} htmlFor='votes'>Votes:</label>
     <p className='votes'>{votes}</p>
     <Link to="/">Back to Articles</Link>
+    <button onClick = {commentsClicked}>Comments</button>
+    {showComments && <Comments comments={comments} />}
     </div>
+        
 )
 }
 
