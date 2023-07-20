@@ -11,7 +11,7 @@ const Articlecard = ({
   body,
   article_img_url,
   backToArticles,
-  //canBeClicked = true,
+ 
 }) => {
   return (
  
