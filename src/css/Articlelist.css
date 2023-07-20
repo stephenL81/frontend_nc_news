@@ -3,6 +3,6 @@
     }
 
     .articleList img {
-        max-width: 150px; /* Adjust this value as needed to control the image size */
+        max-width: 150px; 
         height: auto;
       }

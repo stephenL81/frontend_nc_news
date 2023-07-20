@@ -22,4 +22,3 @@ function App() {
 }
 
 export default App;
-///api/articles/:article_id'
