@@ -14,6 +14,8 @@ return(
     <p>By: {author}</p>
     <p>Created: {created_at}</p>
     <p>Votes: </p>
+    {/* <button>Click to like</button> */}
+    {/* have a like button. when it is clicked an unlike replaces it. Limit this to one press· */}
     <hr/>
     </div>
     
