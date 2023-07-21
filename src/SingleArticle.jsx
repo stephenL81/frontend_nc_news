@@ -52,7 +52,7 @@ const optimisticVote = (value) => {
         decreaseVote(article_id).catch(() => {
           setVoteCount((prevVoteCount) => prevVoteCount - value);
           setVoted((prevVoted) => !prevVoted);
-7"
+
         });
       }
     }
